@@ -59,12 +59,8 @@ a{color:inherit}
   justify-content:space-between;
   gap:18px;
 }
-.wordmark{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--navy);
-}
+.wordmark{display:flex;align-items:center;color:var(--navy)}
+.brand-logo{display:block;width:min(360px,42vw);height:auto;max-height:96px;object-fit:contain;object-position:left center}
 .mark{
   width:48px;height:48px;border-radius:50%;
   border:3px solid var(--navy);
@@ -310,7 +306,7 @@ button{cursor:pointer}
 }
 @media(max-width:650px){
   .brand-row{align-items:flex-start}
-  .wordmark-text strong{font-size:19px}
+  .brand-logo{width:min(285px,58vw);max-height:76px}
   .event-pill{font-size:10px}
   .tools{grid-template-columns:1fr}
   .savedlist{grid-template-columns:1fr}
@@ -324,13 +320,7 @@ button{cursor:pointer}
 <header class="hero">
   <div class="hero-inner">
     <div class="brand-row">
-      <div class="wordmark" aria-label="League of Wisconsin Municipalities">
-        <div class="mark" aria-hidden="true"></div>
-        <div class="wordmark-text">
-          <strong>LEAGUE</strong>
-          <span>OF WISCONSIN MUNICIPALITIES</span>
-        </div>
-      </div>
+      <div class="wordmark" aria-label="League of Wisconsin Municipalities"><img class="brand-logo" src="league-logo.webp" alt="League of Wisconsin Municipalities"></div>
       <div class="event-pill">Civic Connection 2026</div>
     </div>
     <div class="hero-copy">
