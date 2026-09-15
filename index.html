@@ -16,25 +16,41 @@ const frame=document.getElementById('expo');
 frame.addEventListener('load',()=>{
   const d=frame.contentDocument;
   if(!d)return;
+
   const style=d.createElement('style');
   style.textContent=`
     .map{min-width:0!important;width:100%!important}
-    .mapscroll{overflow:hidden!important;padding:12px!important}
-    .map svg,.mapscroll svg{width:100%!important;height:auto!important;max-height:calc(100vh - 300px)!important;display:block!important;margin:0 auto!important}
-    select,#filter,.categories,.category-menu,.category-list,.filter-menu,.saved,.savedlist,.savedhead{display:none!important}
+    .mapscroll{overflow:auto!important;padding:18px!important}
+    .map svg,.mapscroll svg{width:100%!important;height:auto!important;max-height:none!important;display:block!important;margin:0!important}
+    select,#filter,.categories,.category-menu,.category-list,.filter-menu,.saved,.savedlist,.savedhead,.industry{display:none!important}
     @media(max-width:1100px){
       .layout{grid-template-columns:1fr!important}
       .panel{position:static!important}
-      .map svg,.mapscroll svg{max-height:none!important}
+      .map{min-width:760px!important}
     }
     @media(max-width:650px){
-      .mapscroll{padding:8px!important}
+      .mapscroll{padding:10px!important}
       .cardhead span{display:none!important}
+      .map{min-width:720px!important}
     }
   `;
   d.head.appendChild(style);
 
-  d.querySelectorAll('select,#filter,.categories,.category-menu,.category-list,.filter-menu,.saved,.savedlist,.savedhead').forEach(el=>el.remove());
+  d.querySelectorAll('select,#filter,.categories,.category-menu,.category-list,.filter-menu,.saved,.savedlist,.savedhead,.industry').forEach(el=>el.remove());
+
+  const scrubIndustry=()=>{
+    d.querySelectorAll('.industry').forEach(el=>el.remove());
+    d.querySelectorAll('#panel .missing').forEach(el=>{
+      if((el.textContent||'').trim().toLowerCase().startsWith('industry')) el.remove();
+    });
+    const emptyText=d.querySelector('#panel .empty p');
+    if(emptyText) emptyText.textContent='Click an occupied booth to view the company name, linked logo and website, description, booth number, and contacts.';
+  };
+  scrubIndustry();
+  const panel=d.getElementById('panel');
+  if(panel){
+    new MutationObserver(scrubIndustry).observe(panel,{childList:true,subtree:true});
+  }
 
   const intro=d.querySelector('.intro');
   if(intro) intro.textContent='Search for an exhibitor or select an occupied booth on the floor plan.';
