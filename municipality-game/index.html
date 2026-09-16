@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#19286B">
-  <title>Wisconsin or Wishconsin? | League of Wisconsin Municipalities</title>
+  <title>Wisconsin or Wishconsin? | League Insurance</title>
   <style>
     :root{
       --navy:#19286B;
@@ -24,34 +24,54 @@
     *{box-sizing:border-box}
     html{min-height:100%;background:var(--soft)}
     body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--soft)}
-    button{font:inherit}
-    button:focus-visible,a:focus-visible{outline:4px solid rgba(253,183,20,.55);outline-offset:3px}
-    .top-stripe{height:8px;background:linear-gradient(90deg,var(--navy) 0 38%,var(--gold) 38% 55%,var(--sky) 55% 72%,var(--green) 72% 86%,var(--magenta) 86%)}
-    .shell{width:min(1080px,calc(100% - 28px));margin:0 auto;padding:22px 0 32px}
-    .brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
-    .brandbar img{width:min(310px,52vw);height:auto;display:block}
+    button,input{font:inherit}
+    button:focus-visible,input:focus-visible,a:focus-visible{outline:4px solid rgba(253,183,20,.55);outline-offset:3px}
+    .top-stripe{height:8px;background:linear-gradient(90deg,var(--navy) 0 44%,var(--gold) 44% 67%,var(--sky) 67% 82%,var(--green) 82% 91%,var(--magenta) 91%)}
+    .shell{width:min(1120px,calc(100% - 28px));margin:0 auto;padding:20px 0 34px}
+    .brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:16px}
+    .brandbar img{width:min(360px,58vw);height:auto;display:block}
     .event-tag{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px;white-space:nowrap}
     .game-frame{background:var(--paper);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);overflow:hidden}
-    .hero{padding:46px clamp(24px,6vw,74px) 42px;background:var(--navy);color:#fff;position:relative;isolation:isolate}
+    .hero{padding:44px clamp(24px,6vw,74px) 40px;background:var(--navy);color:#fff;position:relative;isolation:isolate}
     .hero:after{content:"";position:absolute;right:-55px;bottom:-85px;width:230px;height:230px;border:34px solid rgba(253,183,20,.16);border-radius:50%;z-index:-1}
     .eyebrow{font-size:.9rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
     h1{font-size:clamp(2.45rem,7vw,5.45rem);line-height:.92;margin:0;letter-spacing:-.04em;max-width:840px}
     .hero p{font-size:clamp(1.02rem,2.1vw,1.35rem);line-height:1.45;max-width:780px;margin:20px 0 0;color:#F1F4FF}
-    .start-body{padding:30px clamp(24px,6vw,74px) 42px}
-    .choice-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 26px}
+    .start-body{padding:30px clamp(24px,5vw,58px) 42px}
+    .start-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:28px;align-items:start}
+    .choice-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 24px}
     .preview-card{border-radius:18px;padding:17px 16px;font-weight:800;text-align:center;border:2px solid transparent}
     .preview-card.city{background:#EEF0F8;color:var(--navy);border-color:#C7CCE3}
     .preview-card.town{background:#F4F7DF;color:#59610E;border-color:#DCE5A2}
     .preview-card.fake{background:#F9EAF0;color:#8E1746;border-color:#E9BDD0}
-    .rules{font-size:1rem;line-height:1.55;color:var(--muted);margin:0 0 26px}
+    .rules{font-size:1rem;line-height:1.55;color:var(--muted);margin:0 0 22px}
+    .name-block{display:grid;gap:8px;max-width:430px;margin-bottom:16px}
+    .name-block label{font-weight:900;color:var(--navy)}
+    .name-block input{width:100%;min-height:50px;border:2px solid var(--line);border-radius:13px;padding:11px 13px;font-size:1rem;color:var(--ink);background:#fff}
+    .name-help{font-size:.82rem;line-height:1.4;color:var(--muted)}
     .primary{border:0;border-radius:14px;background:var(--gold);color:#172033;font-weight:900;padding:15px 24px;min-height:52px;cursor:pointer;box-shadow:0 5px 0 #D49A08;transition:transform .12s ease,box-shadow .12s ease}
     .primary:hover{transform:translateY(-1px);box-shadow:0 6px 0 #D49A08}
     .primary:active{transform:translateY(3px);box-shadow:0 2px 0 #D49A08}
     .primary.navy{background:var(--navy);color:#fff;box-shadow:0 5px 0 #0D153C}
     .primary.navy:hover{box-shadow:0 6px 0 #0D153C}.primary.navy:active{box-shadow:0 2px 0 #0D153C}
+    .leaderboard{border:1px solid var(--line);border-radius:20px;background:#FAFBFE;overflow:hidden}
+    .leaderboard-head{padding:17px 18px 14px;background:#EEF0F8;border-bottom:1px solid var(--line)}
+    .leaderboard-title{margin:0;color:var(--navy);font-size:1.15rem}
+    .leaderboard-date{margin:4px 0 0;font-size:.79rem;color:var(--muted)}
+    .leaderboard-list{list-style:none;margin:0;padding:7px 0}
+    .leaderboard-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 15px;border-bottom:1px solid #E8ECF4}
+    .leaderboard-row:last-child{border-bottom:0}
+    .leaderboard-rank{font-weight:900;color:var(--navy);text-align:center}
+    .leaderboard-name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .leaderboard-score{font-weight:900;color:var(--magenta);white-space:nowrap}
+    .leaderboard-meta{grid-column:2 / 4;font-size:.73rem;color:var(--muted);margin-top:-6px}
+    .leaderboard-empty{padding:24px 18px;text-align:center;color:var(--muted);line-height:1.45}
     .game-body{display:none;padding:24px clamp(18px,4vw,44px) 36px}
-    .status-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;color:var(--muted);font-weight:700}
-    .score-chip{color:var(--navy);background:#EEF0F8;border-radius:999px;padding:8px 12px;white-space:nowrap}
+    .status-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;color:var(--muted);font-weight:700}
+    .status-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+    .score-chip,.speed-chip{border-radius:999px;padding:8px 12px;white-space:nowrap}
+    .score-chip{color:var(--navy);background:#EEF0F8}
+    .speed-chip{color:#725200;background:#FFF4D3}
     .progress-track{height:10px;border-radius:999px;background:#E9EDF5;overflow:hidden;margin-bottom:27px}
     .progress-fill{height:100%;width:0;background:var(--gold);transition:width .25s ease}
     .question-wrap{text-align:center;padding:8px 0 18px}
@@ -70,6 +90,8 @@
     .reveal.show{display:grid}
     .verdict{font-size:.9rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;margin:0 0 8px}
     .verdict.good{color:var(--good)}.verdict.bad{color:var(--bad)}
+    .points-earned{display:inline-block;margin:0 0 10px;padding:7px 10px;border-radius:999px;background:#FFF4D3;color:#725200;font-size:.84rem;font-weight:900}
+    .points-earned.zero{background:#F2F3F6;color:var(--muted)}
     .reveal h2{font-size:clamp(1.55rem,3vw,2.15rem);color:var(--navy);margin:0 0 10px}
     .reveal-copy{font-size:1.06rem;line-height:1.55;color:var(--muted);margin:0}
     .next-row{margin-top:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -82,25 +104,33 @@
     .map-fake{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:20px;background:rgba(255,255,255,.78);font-size:clamp(1.25rem,4vw,2rem);font-weight:900;color:var(--magenta)}
     .map-fake.show{display:flex}
     .map-caption{font-size:.88rem;color:var(--muted);margin:9px 2px 0;text-align:center;min-height:1.2em}
-    .results{display:none;padding:42px clamp(24px,6vw,74px) 48px;text-align:center}
+    .results{display:none;padding:38px clamp(24px,5vw,58px) 44px;text-align:center}
     .results.show{display:block}
-    .score-big{font-size:clamp(4rem,13vw,8rem);font-weight:900;color:var(--navy);line-height:.9;letter-spacing:-.06em;margin:8px 0 16px}
-    .score-title{font-size:clamp(1.55rem,4vw,2.4rem);margin:0 0 10px;color:var(--magenta)}
-    .score-text{font-size:1.08rem;line-height:1.55;color:var(--muted);max-width:650px;margin:0 auto 28px}
+    .result-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:28px;align-items:start}
+    .result-main{padding:8px 4px}
+    .score-big{font-size:clamp(3.7rem,11vw,7rem);font-weight:900;color:var(--navy);line-height:.92;letter-spacing:-.06em;margin:8px 0 7px}
+    .points-big{font-size:clamp(1.7rem,4.8vw,2.8rem);font-weight:900;color:var(--magenta);margin:0 0 16px}
+    .score-title{font-size:clamp(1.55rem,4vw,2.4rem);margin:0 0 10px;color:var(--navy)}
+    .score-text{font-size:1.05rem;line-height:1.55;color:var(--muted);max-width:650px;margin:0 auto 25px}
     .results-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
     .secondary{border:2px solid var(--navy);color:var(--navy);background:#fff;border-radius:14px;font-weight:900;padding:13px 20px;min-height:52px;cursor:pointer}
     .source-note{padding:13px 18px 18px;text-align:center;color:#70798A;font-size:.76rem;line-height:1.4}
     .loading{padding:60px 20px;text-align:center;color:var(--muted)}
     .error{padding:26px;border:2px solid #D68C98;background:#FBECEF;color:#7A1B2A;border-radius:16px;margin:22px}
+    @media (max-width:820px){
+      .start-grid,.result-grid{grid-template-columns:1fr}
+      .leaderboard{max-width:620px;width:100%}
+    }
     @media (max-width:720px){
-      .shell{width:min(100% - 18px,1080px);padding-top:12px}
+      .shell{width:min(100% - 18px,1120px);padding-top:12px}
       .brandbar{align-items:flex-start}.event-tag{font-size:.7rem;padding:7px 9px}
       .game-frame{border-radius:20px}.hero{padding-top:34px}
       .choice-preview,.answer-grid{grid-template-columns:1fr}
       .answer{min-height:64px;padding:14px}
       .reveal.show{grid-template-columns:1fr}
       .map-card{order:-1}.map-stage{max-width:470px;margin:0 auto}
-      .status-row{font-size:.9rem}
+      .status-row{font-size:.88rem}
+      .status-right{justify-content:flex-start}
     }
     @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
@@ -109,7 +139,7 @@
   <div class="top-stripe" aria-hidden="true"></div>
   <main class="shell">
     <header class="brandbar">
-      <img src="https://emilygenevaeagon.github.io/expohall/league-logo.svg" alt="League of Wisconsin Municipalities">
+      <img src="assets/league-insurance-logo.svg" alt="League Insurance">
       <div class="event-tag">Expo Hall Game</div>
     </header>
 
@@ -122,21 +152,48 @@
           <h1>Wisconsin or<br>Wishconsin?</h1>
           <p>Is the name on screen a real Wisconsin city or village, a Wisconsin town, or something we completely made up?</p>
         </div>
+
         <div class="start-body">
-          <div class="choice-preview" aria-hidden="true">
-            <div class="preview-card city">City or Village</div>
-            <div class="preview-card town">Town</div>
-            <div class="preview-card fake">Made Up</div>
+          <div class="start-grid">
+            <div>
+              <div class="choice-preview" aria-hidden="true">
+                <div class="preview-card city">City or Village</div>
+                <div class="preview-card town">Town</div>
+                <div class="preview-card fake">Made Up</div>
+              </div>
+
+              <p class="rules">
+                <strong>Six names. Three choices.</strong> Correct answers earn 1,000 points, plus up to 500 speed-bonus points. The faster you answer correctly, the more points you earn.
+              </p>
+
+              <form id="startForm">
+                <div class="name-block">
+                  <label for="playerName">Your name for today's leaderboard</label>
+                  <input id="playerName" name="playerName" type="text" maxlength="20" autocomplete="off" placeholder="Enter your name" required>
+                  <div class="name-help">Your best score for the day is kept if you play more than once.</div>
+                </div>
+                <button id="startBtn" class="primary" type="submit">Start the Game</button>
+              </form>
+            </div>
+
+            <aside class="leaderboard" aria-labelledby="startLeaderboardTitle">
+              <div class="leaderboard-head">
+                <h2 id="startLeaderboardTitle" class="leaderboard-title">Today's Leaderboard</h2>
+                <p id="startLeaderboardDate" class="leaderboard-date"></p>
+              </div>
+              <div id="startLeaderboard"></div>
+            </aside>
           </div>
-          <p class="rules"><strong>Six names. Three choices.</strong> Each game includes two of each category. Pick an answer, see where the real places are on the map, and find out how well you know Wisconsin local government.</p>
-          <button id="startBtn" class="primary" type="button">Start the Game</button>
         </div>
       </div>
 
       <div id="gameScreen" class="game-body">
         <div class="status-row">
           <span id="questionCounter">Question 1 of 6</span>
-          <span id="scoreChip" class="score-chip">Score: 0</span>
+          <div class="status-right">
+            <span id="speedChip" class="speed-chip">Speed bonus: 500</span>
+            <span id="scoreChip" class="score-chip">0 correct • 0 pts</span>
+          </div>
         </div>
         <div class="progress-track" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
 
@@ -154,6 +211,7 @@
         <div id="reveal" class="reveal">
           <div>
             <p id="verdict" class="verdict"></p>
+            <div id="pointsEarned" class="points-earned"></div>
             <h2 id="correctLabel"></h2>
             <p id="revealCopy" class="reveal-copy"></p>
             <div class="next-row">
@@ -173,41 +231,94 @@
       </div>
 
       <div id="resultsScreen" class="results">
-        <p class="eyebrow" style="color:var(--magenta)">Final score</p>
-        <div id="finalScore" class="score-big">0/6</div>
-        <h2 id="scoreTitle" class="score-title"></h2>
-        <p id="scoreText" class="score-text"></p>
-        <div class="results-actions">
-          <button id="playAgainBtn" class="primary" type="button">Play Again</button>
-          <button id="homeBtn" class="secondary" type="button">Back to Start</button>
+        <div class="result-grid">
+          <div class="result-main">
+            <p class="eyebrow" style="color:var(--magenta)">Final score</p>
+            <div id="finalScore" class="score-big">0/6</div>
+            <div id="finalPoints" class="points-big">0 points</div>
+            <h2 id="scoreTitle" class="score-title"></h2>
+            <p id="scoreText" class="score-text"></p>
+            <div class="results-actions">
+              <button id="playAgainBtn" class="primary" type="button">Play Again</button>
+              <button id="homeBtn" class="secondary" type="button">Back to Start</button>
+            </div>
+          </div>
+
+          <aside class="leaderboard" aria-labelledby="resultsLeaderboardTitle">
+            <div class="leaderboard-head">
+              <h2 id="resultsLeaderboardTitle" class="leaderboard-title">Today's Leaderboard</h2>
+              <p id="resultsLeaderboardDate" class="leaderboard-date"></p>
+            </div>
+            <div id="resultsLeaderboard"></div>
+          </aside>
         </div>
       </div>
 
-      <div class="source-note">Place classifications and coordinates: U.S. Census Bureau TIGERweb, data as of January 1, 2026. “Made Up” means the name is not a current Wisconsin city, village, or town.</div>
+      <div class="source-note">
+        Place classifications and coordinates: U.S. Census Bureau TIGERweb, data as of January 1, 2026. “Made Up” means the name is not a current Wisconsin city, village, or town.
+      </div>
     </section>
   </main>
 
   <script>
   (() => {
     'use strict';
+
     const GAME_LENGTH = 6;
     const CATEGORY_COUNT = 2;
+    const BASE_POINTS = 1000;
+    const MAX_SPEED_BONUS = 500;
+    const SPEED_WINDOW_SECONDS = 20;
+    const LEADERBOARD_LIMIT = 10;
+    const STORAGE_PREFIX = 'wisconsinWishconsinLeaderboard:';
     const MAP = {minLng:-93.25,maxLng:-86.55,minLat:42.30,maxLat:47.20};
     const categories = ['City or Village','Town','Made Up'];
+
     let bank = [];
     let round = [];
     let index = 0;
-    let score = 0;
+    let correctCount = 0;
+    let points = 0;
     let answered = false;
+    let playerName = '';
+    let questionStartedAt = 0;
+    let totalResponseMs = 0;
+    let speedTimer = null;
 
     const $ = (id) => document.getElementById(id);
     const els = {
-      loading:$('loading'), start:$('startScreen'), game:$('gameScreen'), results:$('resultsScreen'),
-      startBtn:$('startBtn'), nextBtn:$('nextBtn'), playAgainBtn:$('playAgainBtn'), homeBtn:$('homeBtn'),
-      counter:$('questionCounter'), scoreChip:$('scoreChip'), progress:$('progressFill'), place:$('placeName'),
-      answerGrid:$('answerGrid'), reveal:$('reveal'), verdict:$('verdict'), correctLabel:$('correctLabel'),
-      revealCopy:$('revealCopy'), mapPin:$('mapPin'), mapFake:$('mapFake'), mapCaption:$('mapCaption'),
-      finalScore:$('finalScore'), scoreTitle:$('scoreTitle'), scoreText:$('scoreText')
+      loading:$('loading'),
+      start:$('startScreen'),
+      game:$('gameScreen'),
+      results:$('resultsScreen'),
+      startForm:$('startForm'),
+      playerName:$('playerName'),
+      startBtn:$('startBtn'),
+      nextBtn:$('nextBtn'),
+      playAgainBtn:$('playAgainBtn'),
+      homeBtn:$('homeBtn'),
+      counter:$('questionCounter'),
+      scoreChip:$('scoreChip'),
+      speedChip:$('speedChip'),
+      progress:$('progressFill'),
+      place:$('placeName'),
+      answerGrid:$('answerGrid'),
+      reveal:$('reveal'),
+      verdict:$('verdict'),
+      pointsEarned:$('pointsEarned'),
+      correctLabel:$('correctLabel'),
+      revealCopy:$('revealCopy'),
+      mapPin:$('mapPin'),
+      mapFake:$('mapFake'),
+      mapCaption:$('mapCaption'),
+      finalScore:$('finalScore'),
+      finalPoints:$('finalPoints'),
+      scoreTitle:$('scoreTitle'),
+      scoreText:$('scoreText'),
+      startLeaderboard:$('startLeaderboard'),
+      resultsLeaderboard:$('resultsLeaderboard'),
+      startLeaderboardDate:$('startLeaderboardDate'),
+      resultsLeaderboardDate:$('resultsLeaderboardDate')
     };
 
     function shuffle(items){
@@ -217,6 +328,148 @@
         [a[i],a[j]]=[a[j],a[i]];
       }
       return a;
+    }
+
+    function localDateKey(date = new Date()){
+      const yyyy = date.getFullYear();
+      const mm = String(date.getMonth()+1).padStart(2,'0');
+      const dd = String(date.getDate()).padStart(2,'0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function displayDate(date = new Date()){
+      return new Intl.DateTimeFormat(undefined, {
+        weekday:'long',
+        month:'long',
+        day:'numeric'
+      }).format(date);
+    }
+
+    function leaderboardKey(){
+      return STORAGE_PREFIX + localDateKey();
+    }
+
+    function cleanupOldLeaderboards(){
+      try {
+        const activeKey = leaderboardKey();
+        for(let i=localStorage.length-1;i>=0;i--){
+          const key = localStorage.key(i);
+          if(key && key.startsWith(STORAGE_PREFIX) && key !== activeKey){
+            localStorage.removeItem(key);
+          }
+        }
+      } catch (_) {}
+    }
+
+    function readLeaderboard(){
+      cleanupOldLeaderboards();
+      try {
+        const raw = localStorage.getItem(leaderboardKey());
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function writeLeaderboard(entries){
+      try {
+        localStorage.setItem(leaderboardKey(), JSON.stringify(entries));
+      } catch (_) {}
+    }
+
+    function normalizeName(value){
+      return value.replace(/\s+/g,' ').trim().slice(0,20);
+    }
+
+    function rankEntries(entries){
+      return [...entries].sort((a,b) =>
+        (b.points - a.points) ||
+        (b.correct - a.correct) ||
+        (a.responseMs - b.responseMs) ||
+        String(a.name).localeCompare(String(b.name))
+      );
+    }
+
+    function saveScore(){
+      const cleanName = normalizeName(playerName);
+      if(!cleanName) return;
+
+      const entries = readLeaderboard();
+      const candidate = {
+        name:cleanName,
+        points,
+        correct:correctCount,
+        responseMs:Math.round(totalResponseMs),
+        playedAt:Date.now()
+      };
+
+      const sameNameIndex = entries.findIndex(
+        entry => String(entry.name).toLocaleLowerCase() === cleanName.toLocaleLowerCase()
+      );
+
+      if(sameNameIndex >= 0){
+        const current = entries[sameNameIndex];
+        const candidateRanksHigher =
+          candidate.points > current.points ||
+          (candidate.points === current.points && candidate.correct > current.correct) ||
+          (candidate.points === current.points && candidate.correct === current.correct && candidate.responseMs < current.responseMs);
+
+        if(candidateRanksHigher){
+          entries[sameNameIndex] = candidate;
+        }
+      } else {
+        entries.push(candidate);
+      }
+
+      const ranked = rankEntries(entries).slice(0,LEADERBOARD_LIMIT);
+      writeLeaderboard(ranked);
+    }
+
+    function renderLeaderboard(target){
+      const entries = rankEntries(readLeaderboard()).slice(0,LEADERBOARD_LIMIT);
+      const dateText = `${displayDate()} • Resets daily`;
+      els.startLeaderboardDate.textContent = dateText;
+      els.resultsLeaderboardDate.textContent = dateText;
+
+      if(!entries.length){
+        target.innerHTML = '<div class="leaderboard-empty">No scores yet today.<br>Be the first on the board.</div>';
+        return;
+      }
+
+      const list = document.createElement('ol');
+      list.className = 'leaderboard-list';
+
+      entries.forEach((entry,idx) => {
+        const li = document.createElement('li');
+        li.className = 'leaderboard-row';
+
+        const rank = document.createElement('span');
+        rank.className = 'leaderboard-rank';
+        rank.textContent = String(idx+1);
+
+        const name = document.createElement('span');
+        name.className = 'leaderboard-name';
+        name.textContent = entry.name;
+
+        const score = document.createElement('span');
+        score.className = 'leaderboard-score';
+        score.textContent = `${Number(entry.points).toLocaleString()} pts`;
+
+        const meta = document.createElement('span');
+        meta.className = 'leaderboard-meta';
+        meta.textContent = `${entry.correct}/${GAME_LENGTH} correct`;
+
+        li.append(rank,name,score,meta);
+        list.appendChild(li);
+      });
+
+      target.replaceChildren(list);
+    }
+
+    function renderAllLeaderboards(){
+      renderLeaderboard(els.startLeaderboard);
+      renderLeaderboard(els.resultsLeaderboard);
     }
 
     function buildRound(){
@@ -232,39 +485,101 @@
       els.start.hidden = screen !== 'start';
       els.game.style.display = screen === 'game' ? 'block' : 'none';
       els.results.classList.toggle('show', screen === 'results');
-      if(screen !== 'results') els.results.style.display='none';
-      else els.results.style.display='block';
+      els.results.style.display = screen === 'results' ? 'block' : 'none';
+
+      if(screen === 'start' || screen === 'results'){
+        renderAllLeaderboards();
+      }
+    }
+
+    function currentSpeedBonus(elapsedSeconds){
+      const fractionRemaining = Math.max(0, 1 - Math.min(elapsedSeconds,SPEED_WINDOW_SECONDS) / SPEED_WINDOW_SECONDS);
+      return Math.round(MAX_SPEED_BONUS * fractionRemaining);
+    }
+
+    function stopSpeedTimer(){
+      if(speedTimer !== null){
+        window.clearInterval(speedTimer);
+        speedTimer = null;
+      }
+    }
+
+    function updateSpeedChip(){
+      if(answered) return;
+      const elapsedSeconds = Math.max(0,(performance.now()-questionStartedAt)/1000);
+      const bonus = currentSpeedBonus(elapsedSeconds);
+      els.speedChip.textContent = `Speed bonus: ${bonus.toLocaleString()}`;
+    }
+
+    function startSpeedTimer(){
+      stopSpeedTimer();
+      questionStartedAt = performance.now();
+      updateSpeedChip();
+      speedTimer = window.setInterval(updateSpeedChip,100);
     }
 
     function beginGame(){
-      round=buildRound(); index=0; score=0; answered=false;
-      show('game'); renderQuestion();
+      playerName = normalizeName(els.playerName.value);
+      if(!playerName){
+        els.playerName.focus();
+        return;
+      }
+
+      round=buildRound();
+      index=0;
+      correctCount=0;
+      points=0;
+      totalResponseMs=0;
+      answered=false;
+      show('game');
+      renderQuestion();
     }
 
     function renderQuestion(){
       answered=false;
       const q=round[index];
+
       els.counter.textContent=`Question ${index+1} of ${GAME_LENGTH}`;
-      els.scoreChip.textContent=`Score: ${score}`;
+      els.scoreChip.textContent=`${correctCount} correct • ${points.toLocaleString()} pts`;
       els.progress.style.width=`${(index/GAME_LENGTH)*100}%`;
       els.place.textContent=q.question;
       els.reveal.classList.remove('show');
       els.mapPin.classList.remove('show');
       els.mapFake.classList.remove('show');
       els.mapCaption.textContent='';
+      els.pointsEarned.textContent='';
+      els.pointsEarned.classList.remove('zero');
       els.nextBtn.textContent=index===GAME_LENGTH-1?'See My Score':'Next Question';
+
       [...els.answerGrid.querySelectorAll('.answer')].forEach(btn=>{
-        btn.disabled=false; btn.classList.remove('correct','wrong');
+        btn.disabled=false;
+        btn.classList.remove('correct','wrong');
       });
+
+      startSpeedTimer();
       requestAnimationFrame(()=>els.answerGrid.querySelector('.answer')?.focus({preventScroll:true}));
     }
 
     function answer(selected){
       if(answered) return;
       answered=true;
+      stopSpeedTimer();
+
+      const responseMs = Math.max(0,performance.now()-questionStartedAt);
+      const elapsedSeconds = responseMs/1000;
+      totalResponseMs += responseMs;
+
       const q=round[index];
       const correct=selected===q.correctAnswer;
-      if(correct) score++;
+      let earned=0;
+      let speedBonus=0;
+
+      if(correct){
+        speedBonus=currentSpeedBonus(elapsedSeconds);
+        earned=BASE_POINTS+speedBonus;
+        correctCount++;
+        points+=earned;
+      }
 
       [...els.answerGrid.querySelectorAll('.answer')].forEach(btn=>{
         btn.disabled=true;
@@ -272,10 +587,15 @@
         if(btn.dataset.answer===selected && !correct) btn.classList.add('wrong');
       });
 
-      els.scoreChip.textContent=`Score: ${score}`;
+      els.scoreChip.textContent=`${correctCount} correct • ${points.toLocaleString()} pts`;
+      els.speedChip.textContent=correct ? `Speed bonus earned: ${speedBonus.toLocaleString()}` : 'Speed bonus: 0';
       els.progress.style.width=`${((index+1)/GAME_LENGTH)*100}%`;
       els.verdict.textContent=correct?'Correct':'Not quite';
       els.verdict.className=`verdict ${correct?'good':'bad'}`;
+      els.pointsEarned.textContent = correct
+        ? `+${earned.toLocaleString()} points (${speedBonus.toLocaleString()} speed bonus)`
+        : '+0 points';
+      els.pointsEarned.classList.toggle('zero',!correct);
       els.correctLabel.textContent=q.correctAnswer;
       els.revealCopy.textContent=q.reveal;
 
@@ -297,46 +617,97 @@
 
     function next(){
       if(!answered) return;
-      if(index>=GAME_LENGTH-1){ finish(); return; }
-      index++; renderQuestion();
+      if(index>=GAME_LENGTH-1){
+        finish();
+        return;
+      }
+      index++;
+      renderQuestion();
     }
 
     function finish(){
-      els.finalScore.textContent=`${score}/${GAME_LENGTH}`;
+      stopSpeedTimer();
+      saveScore();
+
+      els.finalScore.textContent=`${correctCount}/${GAME_LENGTH}`;
+      els.finalPoints.textContent=`${points.toLocaleString()} points`;
+
       let title, text;
-      if(score===6){title='Wisconsin Municipal Master';text='You went six for six. Cities, villages, towns, and fakes did not trip you up.';}
-      else if(score===5){title='You Know Your Wisconsin';text='Five out of six. That is serious Wisconsin local-government knowledge.';}
-      else if(score>=3){title='Solid Local Knowledge';text='You held your own. A few Wisconsin names are designed to make even experienced people second-guess themselves.';}
-      else {title='Wisconsin Keeps You Guessing';text='Some of the real names sound invented, and some of the invented names sound completely plausible. That is the point.';}
-      els.scoreTitle.textContent=title; els.scoreText.textContent=text;
+      if(correctCount===6){
+        title='Wisconsin Municipal Master';
+        text='Six for six. Your speed determined where you landed on today’s leaderboard.';
+      } else if(correctCount===5){
+        title='You Know Your Wisconsin';
+        text='Five correct. A faster replay could still move you up the leaderboard.';
+      } else if(correctCount>=3){
+        title='Solid Local Knowledge';
+        text='You held your own. Accuracy matters most, then speed separates the scores.';
+      } else {
+        title='Wisconsin Keeps You Guessing';
+        text='Some real names sound invented, and some invented names sound completely plausible. Try another round.';
+      }
+
+      els.scoreTitle.textContent=title;
+      els.scoreText.textContent=text;
       show('results');
       els.playAgainBtn.focus({preventScroll:false});
     }
 
-    els.startBtn.addEventListener('click',beginGame);
-    els.playAgainBtn.addEventListener('click',beginGame);
-    els.homeBtn.addEventListener('click',()=>show('start'));
+    els.startForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      beginGame();
+    });
+
+    els.playAgainBtn.addEventListener('click',()=>{
+      show('start');
+      els.playerName.value=playerName;
+      els.playerName.focus({preventScroll:false});
+      els.playerName.select();
+    });
+
+    els.homeBtn.addEventListener('click',()=>{
+      show('start');
+      els.playerName.focus({preventScroll:false});
+    });
+
     els.nextBtn.addEventListener('click',next);
+
     els.answerGrid.addEventListener('click',e=>{
-      const btn=e.target.closest('.answer'); if(btn) answer(btn.dataset.answer);
+      const btn=e.target.closest('.answer');
+      if(btn) answer(btn.dataset.answer);
     });
 
     document.addEventListener('keydown',e=>{
       if(els.game.style.display!=='block') return;
+
       if(!answered && ['1','2','3'].includes(e.key)){
         const btn=els.answerGrid.querySelectorAll('.answer')[Number(e.key)-1];
         if(btn) answer(btn.dataset.answer);
-      } else if(answered && e.key==='Enter') next();
+      } else if(answered && e.key==='Enter'){
+        next();
+      }
+    });
+
+    window.addEventListener('storage',e=>{
+      if(e.key && e.key.startsWith(STORAGE_PREFIX)){
+        renderAllLeaderboards();
+      }
     });
 
     fetch('game-bank.json',{cache:'no-store'})
-      .then(r=>{if(!r.ok) throw new Error(`Question bank returned ${r.status}`); return r.json();})
+      .then(r=>{
+        if(!r.ok) throw new Error(`Question bank returned ${r.status}`);
+        return r.json();
+      })
       .then(data=>{
         const questions=Array.isArray(data)?data:data.questions;
-        if(!Array.isArray(questions) || questions.length<6) throw new Error('Question bank is incomplete.');
+        if(!Array.isArray(questions) || questions.length<6){
+          throw new Error('Question bank is incomplete.');
+        }
         bank=questions;
         els.loading.remove();
         els.start.hidden=false;
+        renderAllLeaderboards();
       })
       .catch(err=>{
         els.loading.className='error';
