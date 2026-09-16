@@ -4,7 +4,9 @@ A booth-friendly League of Wisconsin Municipalities game for Civic Connection / 
 
 ## Live deployment
 
-This folder is designed to run as a static GitHub Pages site. No build tools or dependencies are required.
+This folder runs as a static GitHub Pages site. No build tools or dependencies are required.
+
+Current page path: `https://emilygenevaeagon.github.io/expohall/municipality-game/`
 
 ## Game design
 
@@ -39,10 +41,9 @@ The League logo is loaded from the existing public `expohall` GitHub Pages asset
 
 ## Editing questions
 
-Each record in `game-bank.json` includes:
+`game-bank.json` defines the three potential answers once at the top level. Each question record includes:
 
 - `question`
-- `answers`
 - `correctAnswer`
 - `actualType`
 - `county`
