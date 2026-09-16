@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#19286B">
+  <title>Wisconsin or Wishconsin? | League of Wisconsin Municipalities</title>
+  <style>
+    :root{
+      --navy:#19286B;
+      --gold:#FDB714;
+      --sky:#96C0E6;
+      --green:#B4BE35;
+      --magenta:#B01E58;
+      --ink:#172033;
+      --muted:#5F6879;
+      --paper:#FFFFFF;
+      --soft:#F5F7FB;
+      --line:#D8DEEA;
+      --good:#2F7D32;
+      --bad:#A32638;
+      --shadow:0 14px 38px rgba(25,40,107,.14);
+    }
+    *{box-sizing:border-box}
+    html{min-height:100%;background:var(--soft)}
+    body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--soft)}
+    button{font:inherit}
+    button:focus-visible,a:focus-visible{outline:4px solid rgba(253,183,20,.55);outline-offset:3px}
+    .top-stripe{height:8px;background:linear-gradient(90deg,var(--navy) 0 38%,var(--gold) 38% 55%,var(--sky) 55% 72%,var(--green) 72% 86%,var(--magenta) 86%)}
+    .shell{width:min(1080px,calc(100% - 28px));margin:0 auto;padding:22px 0 32px}
+    .brandbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .brandbar img{width:min(310px,52vw);height:auto;display:block}
+    .event-tag{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 12px;white-space:nowrap}
+    .game-frame{background:var(--paper);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);overflow:hidden}
+    .hero{padding:46px clamp(24px,6vw,74px) 42px;background:var(--navy);color:#fff;position:relative;isolation:isolate}
+    .hero:after{content:"";position:absolute;right:-55px;bottom:-85px;width:230px;height:230px;border:34px solid rgba(253,183,20,.16);border-radius:50%;z-index:-1}
+    .eyebrow{font-size:.9rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+    h1{font-size:clamp(2.45rem,7vw,5.45rem);line-height:.92;margin:0;letter-spacing:-.04em;max-width:840px}
+    .hero p{font-size:clamp(1.02rem,2.1vw,1.35rem);line-height:1.45;max-width:780px;margin:20px 0 0;color:#F1F4FF}
+    .start-body{padding:30px clamp(24px,6vw,74px) 42px}
+    .choice-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 26px}
+    .preview-card{border-radius:18px;padding:17px 16px;font-weight:800;text-align:center;border:2px solid transparent}
+    .preview-card.city{background:#EEF0F8;color:var(--navy);border-color:#C7CCE3}
+    .preview-card.town{background:#F4F7DF;color:#59610E;border-color:#DCE5A2}
+    .preview-card.fake{background:#F9EAF0;color:#8E1746;border-color:#E9BDD0}
+    .rules{font-size:1rem;line-height:1.55;color:var(--muted);margin:0 0 26px}
+    .primary{border:0;border-radius:14px;background:var(--gold);color:#172033;font-weight:900;padding:15px 24px;min-height:52px;cursor:pointer;box-shadow:0 5px 0 #D49A08;transition:transform .12s ease,box-shadow .12s ease}
+    .primary:hover{transform:translateY(-1px);box-shadow:0 6px 0 #D49A08}
+    .primary:active{transform:translateY(3px);box-shadow:0 2px 0 #D49A08}
+    .primary.navy{background:var(--navy);color:#fff;box-shadow:0 5px 0 #0D153C}
+    .primary.navy:hover{box-shadow:0 6px 0 #0D153C}.primary.navy:active{box-shadow:0 2px 0 #0D153C}
+    .game-body{display:none;padding:24px clamp(18px,4vw,44px) 36px}
+    .status-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;color:var(--muted);font-weight:700}
+    .score-chip{color:var(--navy);background:#EEF0F8;border-radius:999px;padding:8px 12px;white-space:nowrap}
+    .progress-track{height:10px;border-radius:999px;background:#E9EDF5;overflow:hidden;margin-bottom:27px}
+    .progress-fill{height:100%;width:0;background:var(--gold);transition:width .25s ease}
+    .question-wrap{text-align:center;padding:8px 0 18px}
+    .question-label{font-size:.84rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--magenta);margin-bottom:9px}
+    .place-name{font-size:clamp(2.5rem,8vw,5.5rem);line-height:1;letter-spacing:-.04em;color:var(--navy);font-weight:900;min-height:1.1em;display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere}
+    .answer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 0}
+    .answer{border-radius:18px;padding:20px 15px;min-height:86px;border:2px solid var(--line);background:#fff;font-weight:900;font-size:clamp(1rem,2vw,1.24rem);cursor:pointer;transition:transform .12s ease,border-color .12s ease,background .12s ease;display:flex;align-items:center;justify-content:center;text-align:center}
+    .answer:hover{transform:translateY(-2px)}
+    .answer[data-answer="City or Village"]{border-color:#BAC2E3;color:var(--navy)}
+    .answer[data-answer="Town"]{border-color:#CFD98E;color:#5F6814}
+    .answer[data-answer="Made Up"]{border-color:#E0A7C0;color:#98194E}
+    .answer:disabled{cursor:default;transform:none;opacity:.72}
+    .answer.correct{background:#EAF6EB;border-color:#70A573;color:#215C24;opacity:1}
+    .answer.wrong{background:#FBECEF;border-color:#D68C98;color:#8D1E30;opacity:1}
+    .reveal{display:none;margin-top:22px;border-top:1px solid var(--line);padding-top:24px;grid-template-columns:minmax(0,1fr) minmax(260px,390px);gap:28px;align-items:center}
+    .reveal.show{display:grid}
+    .verdict{font-size:.9rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;margin:0 0 8px}
+    .verdict.good{color:var(--good)}.verdict.bad{color:var(--bad)}
+    .reveal h2{font-size:clamp(1.55rem,3vw,2.15rem);color:var(--navy);margin:0 0 10px}
+    .reveal-copy{font-size:1.06rem;line-height:1.55;color:var(--muted);margin:0}
+    .next-row{margin-top:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .keyboard-note{font-size:.82rem;color:var(--muted)}
+    .map-card{background:#F7FAFD;border:1px solid var(--line);border-radius:20px;padding:14px;min-width:0}
+    .map-stage{position:relative;width:100%;aspect-ratio:6.7/4.9;border-radius:13px;overflow:hidden;background:#EAF4FB}
+    .map-stage img{width:100%;height:100%;display:block;object-fit:fill}
+    .map-pin{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--magenta);border:4px solid #fff;box-shadow:0 0 0 3px var(--magenta),0 4px 9px rgba(0,0,0,.18);transform:translate(-50%,-50%);display:none}
+    .map-pin.show{display:block}
+    .map-fake{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:20px;background:rgba(255,255,255,.78);font-size:clamp(1.25rem,4vw,2rem);font-weight:900;color:var(--magenta)}
+    .map-fake.show{display:flex}
+    .map-caption{font-size:.88rem;color:var(--muted);margin:9px 2px 0;text-align:center;min-height:1.2em}
+    .results{display:none;padding:42px clamp(24px,6vw,74px) 48px;text-align:center}
+    .results.show{display:block}
+    .score-big{font-size:clamp(4rem,13vw,8rem);font-weight:900;color:var(--navy);line-height:.9;letter-spacing:-.06em;margin:8px 0 16px}
+    .score-title{font-size:clamp(1.55rem,4vw,2.4rem);margin:0 0 10px;color:var(--magenta)}
+    .score-text{font-size:1.08rem;line-height:1.55;color:var(--muted);max-width:650px;margin:0 auto 28px}
+    .results-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+    .secondary{border:2px solid var(--navy);color:var(--navy);background:#fff;border-radius:14px;font-weight:900;padding:13px 20px;min-height:52px;cursor:pointer}
+    .source-note{padding:13px 18px 18px;text-align:center;color:#70798A;font-size:.76rem;line-height:1.4}
+    .loading{padding:60px 20px;text-align:center;color:var(--muted)}
+    .error{padding:26px;border:2px solid #D68C98;background:#FBECEF;color:#7A1B2A;border-radius:16px;margin:22px}
+    @media (max-width:720px){
+      .shell{width:min(100% - 18px,1080px);padding-top:12px}
+      .brandbar{align-items:flex-start}.event-tag{font-size:.7rem;padding:7px 9px}
+      .game-frame{border-radius:20px}.hero{padding-top:34px}
+      .choice-preview,.answer-grid{grid-template-columns:1fr}
+      .answer{min-height:64px;padding:14px}
+      .reveal.show{grid-template-columns:1fr}
+      .map-card{order:-1}.map-stage{max-width:470px;margin:0 auto}
+      .status-row{font-size:.9rem}
+    }
+    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="top-stripe" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="brandbar">
+      <img src="https://emilygenevaeagon.github.io/expohall/league-logo.svg" alt="League of Wisconsin Municipalities">
+      <div class="event-tag">Expo Hall Game</div>
+    </header>
+
+    <section class="game-frame" aria-live="polite">
+      <div id="loading" class="loading">Loading the question bank…</div>
+
+      <div id="startScreen" hidden>
+        <div class="hero">
+          <p class="eyebrow">Know your Wisconsin?</p>
+          <h1>Wisconsin or<br>Wishconsin?</h1>
+          <p>Is the name on screen a real Wisconsin city or village, a Wisconsin town, or something we completely made up?</p>
+        </div>
+        <div class="start-body">
+          <div class="choice-preview" aria-hidden="true">
+            <div class="preview-card city">City or Village</div>
+            <div class="preview-card town">Town</div>
+            <div class="preview-card fake">Made Up</div>
+          </div>
+          <p class="rules"><strong>Six names. Three choices.</strong> Each game includes two of each category. Pick an answer, see where the real places are on the map, and find out how well you know Wisconsin local government.</p>
+          <button id="startBtn" class="primary" type="button">Start the Game</button>
+        </div>
+      </div>
+
+      <div id="gameScreen" class="game-body">
+        <div class="status-row">
+          <span id="questionCounter">Question 1 of 6</span>
+          <span id="scoreChip" class="score-chip">Score: 0</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+
+        <div class="question-wrap">
+          <div class="question-label">What is it?</div>
+          <div id="placeName" class="place-name"></div>
+        </div>
+
+        <div id="answerGrid" class="answer-grid" aria-label="Answer choices">
+          <button class="answer" data-answer="City or Village" type="button">City or Village</button>
+          <button class="answer" data-answer="Town" type="button">Town</button>
+          <button class="answer" data-answer="Made Up" type="button">Made Up</button>
+        </div>
+
+        <div id="reveal" class="reveal">
+          <div>
+            <p id="verdict" class="verdict"></p>
+            <h2 id="correctLabel"></h2>
+            <p id="revealCopy" class="reveal-copy"></p>
+            <div class="next-row">
+              <button id="nextBtn" class="primary navy" type="button">Next Question</button>
+              <span class="keyboard-note">Keyboard: 1, 2, 3 to answer. Enter for next.</span>
+            </div>
+          </div>
+          <div class="map-card" aria-label="Wisconsin locator map">
+            <div class="map-stage">
+              <img src="assets/wisconsin-map.svg" alt="Map of Wisconsin and surrounding area">
+              <div id="mapPin" class="map-pin" aria-hidden="true"></div>
+              <div id="mapFake" class="map-fake">No pin to place.<br>This one is made up.</div>
+            </div>
+            <div id="mapCaption" class="map-caption"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultsScreen" class="results">
+        <p class="eyebrow" style="color:var(--magenta)">Final score</p>
+        <div id="finalScore" class="score-big">0/6</div>
+        <h2 id="scoreTitle" class="score-title"></h2>
+        <p id="scoreText" class="score-text"></p>
+        <div class="results-actions">
+          <button id="playAgainBtn" class="primary" type="button">Play Again</button>
+          <button id="homeBtn" class="secondary" type="button">Back to Start</button>
+        </div>
+      </div>
+
+      <div class="source-note">Place classifications and coordinates: U.S. Census Bureau TIGERweb, data as of January 1, 2026. “Made Up” means the name is not a current Wisconsin city, village, or town.</div>
+    </section>
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+    const GAME_LENGTH = 6;
+    const CATEGORY_COUNT = 2;
+    const MAP = {minLng:-93.25,maxLng:-86.55,minLat:42.30,maxLat:47.20};
+    const categories = ['City or Village','Town','Made Up'];
+    let bank = [];
+    let round = [];
+    let index = 0;
+    let score = 0;
+    let answered = false;
+
+    const $ = (id) => document.getElementById(id);
+    const els = {
+      loading:$('loading'), start:$('startScreen'), game:$('gameScreen'), results:$('resultsScreen'),
+      startBtn:$('startBtn'), nextBtn:$('nextBtn'), playAgainBtn:$('playAgainBtn'), homeBtn:$('homeBtn'),
+      counter:$('questionCounter'), scoreChip:$('scoreChip'), progress:$('progressFill'), place:$('placeName'),
+      answerGrid:$('answerGrid'), reveal:$('reveal'), verdict:$('verdict'), correctLabel:$('correctLabel'),
+      revealCopy:$('revealCopy'), mapPin:$('mapPin'), mapFake:$('mapFake'), mapCaption:$('mapCaption'),
+      finalScore:$('finalScore'), scoreTitle:$('scoreTitle'), scoreText:$('scoreText')
+    };
+
+    function shuffle(items){
+      const a = [...items];
+      for(let i=a.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [a[i],a[j]]=[a[j],a[i]];
+      }
+      return a;
+    }
+
+    function buildRound(){
+      let selected=[];
+      categories.forEach(cat => {
+        const pool=shuffle(bank.filter(q=>q.correctAnswer===cat));
+        selected.push(...pool.slice(0,CATEGORY_COUNT));
+      });
+      return shuffle(selected);
+    }
+
+    function show(screen){
+      els.start.hidden = screen !== 'start';
+      els.game.style.display = screen === 'game' ? 'block' : 'none';
+      els.results.classList.toggle('show', screen === 'results');
+      if(screen !== 'results') els.results.style.display='none';
+      else els.results.style.display='block';
+    }
+
+    function beginGame(){
+      round=buildRound(); index=0; score=0; answered=false;
+      show('game'); renderQuestion();
+    }
+
+    function renderQuestion(){
+      answered=false;
+      const q=round[index];
+      els.counter.textContent=`Question ${index+1} of ${GAME_LENGTH}`;
+      els.scoreChip.textContent=`Score: ${score}`;
+      els.progress.style.width=`${(index/GAME_LENGTH)*100}%`;
+      els.place.textContent=q.question;
+      els.reveal.classList.remove('show');
+      els.mapPin.classList.remove('show');
+      els.mapFake.classList.remove('show');
+      els.mapCaption.textContent='';
+      els.nextBtn.textContent=index===GAME_LENGTH-1?'See My Score':'Next Question';
+      [...els.answerGrid.querySelectorAll('.answer')].forEach(btn=>{
+        btn.disabled=false; btn.classList.remove('correct','wrong');
+      });
+      requestAnimationFrame(()=>els.answerGrid.querySelector('.answer')?.focus({preventScroll:true}));
+    }
+
+    function answer(selected){
+      if(answered) return;
+      answered=true;
+      const q=round[index];
+      const correct=selected===q.correctAnswer;
+      if(correct) score++;
+
+      [...els.answerGrid.querySelectorAll('.answer')].forEach(btn=>{
+        btn.disabled=true;
+        if(btn.dataset.answer===q.correctAnswer) btn.classList.add('correct');
+        if(btn.dataset.answer===selected && !correct) btn.classList.add('wrong');
+      });
+
+      els.scoreChip.textContent=`Score: ${score}`;
+      els.progress.style.width=`${((index+1)/GAME_LENGTH)*100}%`;
+      els.verdict.textContent=correct?'Correct':'Not quite';
+      els.verdict.className=`verdict ${correct?'good':'bad'}`;
+      els.correctLabel.textContent=q.correctAnswer;
+      els.revealCopy.textContent=q.reveal;
+
+      if(q.lat!=null && q.lng!=null){
+        const x=((q.lng-MAP.minLng)/(MAP.maxLng-MAP.minLng))*100;
+        const y=((MAP.maxLat-q.lat)/(MAP.maxLat-MAP.minLat))*100;
+        els.mapPin.style.left=`${Math.max(0,Math.min(100,x))}%`;
+        els.mapPin.style.top=`${Math.max(0,Math.min(100,y))}%`;
+        els.mapPin.classList.add('show');
+        els.mapCaption.textContent=`${q.actualType} • ${q.county} County`;
+      } else {
+        els.mapFake.classList.add('show');
+        els.mapCaption.textContent='Invented for the game';
+      }
+
+      els.reveal.classList.add('show');
+      setTimeout(()=>els.nextBtn.focus({preventScroll:false}),80);
+    }
+
+    function next(){
+      if(!answered) return;
+      if(index>=GAME_LENGTH-1){ finish(); return; }
+      index++; renderQuestion();
+    }
+
+    function finish(){
+      els.finalScore.textContent=`${score}/${GAME_LENGTH}`;
+      let title, text;
+      if(score===6){title='Wisconsin Municipal Master';text='You went six for six. Cities, villages, towns, and fakes did not trip you up.';}
+      else if(score===5){title='You Know Your Wisconsin';text='Five out of six. That is serious Wisconsin local-government knowledge.';}
+      else if(score>=3){title='Solid Local Knowledge';text='You held your own. A few Wisconsin names are designed to make even experienced people second-guess themselves.';}
+      else {title='Wisconsin Keeps You Guessing';text='Some of the real names sound invented, and some of the invented names sound completely plausible. That is the point.';}
+      els.scoreTitle.textContent=title; els.scoreText.textContent=text;
+      show('results');
+      els.playAgainBtn.focus({preventScroll:false});
+    }
+
+    els.startBtn.addEventListener('click',beginGame);
+    els.playAgainBtn.addEventListener('click',beginGame);
+    els.homeBtn.addEventListener('click',()=>show('start'));
+    els.nextBtn.addEventListener('click',next);
+    els.answerGrid.addEventListener('click',e=>{
+      const btn=e.target.closest('.answer'); if(btn) answer(btn.dataset.answer);
+    });
+
+    document.addEventListener('keydown',e=>{
+      if(els.game.style.display!=='block') return;
+      if(!answered && ['1','2','3'].includes(e.key)){
+        const btn=els.answerGrid.querySelectorAll('.answer')[Number(e.key)-1];
+        if(btn) answer(btn.dataset.answer);
+      } else if(answered && e.key==='Enter') next();
+    });
+
+    fetch('game-bank.json',{cache:'no-store'})
+      .then(r=>{if(!r.ok) throw new Error(`Question bank returned ${r.status}`); return r.json();})
+      .then(data=>{
+        const questions=Array.isArray(data)?data:data.questions;
+        if(!Array.isArray(questions) || questions.length<6) throw new Error('Question bank is incomplete.');
+        bank=questions;
+        els.loading.remove();
+        els.start.hidden=false;
+      })
+      .catch(err=>{
+        els.loading.className='error';
+        els.loading.textContent=`The game could not load its question bank. ${err.message}`;
+      });
+  })();
+  </script>
+</body>
+</html>
