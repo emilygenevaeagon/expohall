@@ -12,14 +12,14 @@ Current page path: `https://emilygenevaeagon.github.io/expohall/municipality-gam
 
 - Six questions per game
 - Two City/Village questions, two Town questions, and two Made Up questions
-- 72-question bank total: 24 in each category
+- 144-question bank total: 48 in each category
 - Real places are plotted on a Wisconsin locator map after the answer is revealed
 - Touch-friendly and keyboard-friendly controls
 - Responsive for a booth laptop, tablet, or large display
 
 ## Data verification
 
-Real places and coordinates were checked against U.S. Census Bureau TIGERweb data dated January 1, 2026. Fake names were checked against both the Wisconsin incorporated-place and county-subdivision tables so they do not match a current Wisconsin city, village, or town.
+The original real-place records use U.S. Census Bureau TIGERweb data dated January 1, 2026. The 48 added real records use the U.S. Census Bureau [2026 Wisconsin Places Gazetteer](https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2026_Gazetteer/2026_gaz_place_55.txt) and [2026 Wisconsin County Subdivisions Gazetteer](https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2026_Gazetteer/2026_gaz_cousubs_55.txt) for names, types, counties, and representative coordinates. All made-up names were checked against both 2026 files so they do not match a current Wisconsin city, village, or town.
 
 ## Branding
 
